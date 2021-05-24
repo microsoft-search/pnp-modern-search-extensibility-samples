@@ -4,4 +4,4 @@ This project shows how to implement custom data sources for the 'Search Results'
 
 ### Documentation
 
-A complete step-by-step tutorial is available [here](...)
+A complete step-by-step tutorial is available [here](https://microsoft-search.github.io/pnp-modern-search/extensibility/)
