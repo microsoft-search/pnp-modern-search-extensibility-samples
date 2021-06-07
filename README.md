@@ -1,5 +1,3 @@
-![PnP Modern Search - Extensibility samples](https://devofficecdn.azureedge.net/media/Default/PnP/sppnp.png)
-
 # PnP Modern Search - Extensibility samples
 
 This project centralizes extensibility samples made by the community for the [PnP Modern Search solution (v4)](https://github.com/microsoft-search/pnp-modern-search). By "extensions", we mean:
