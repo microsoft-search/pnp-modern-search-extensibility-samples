@@ -5,7 +5,7 @@ This project centralizes extensibility samples made by the community for the [Pn
 - Custom web components
 - Custom search box suggestions providers
 - Custom Handlebars helpers
-- Custom layours (coming soon)
+- Custom layouts (coming soon)
 
 ## Get Started
 
