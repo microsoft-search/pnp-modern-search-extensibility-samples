@@ -20,7 +20,7 @@
         "@microsoft/sp-webpart-base": "1.12.1",
         "@webcomponents/custom-elements": "1.4.3",
         "@webcomponents/webcomponentsjs": "2.5.0",
-        "@pnp/modern-search-extensibility": "1.0.2",
+        "@pnp/modern-search-extensibility": "1.0.3",
         "handlebars": "4.7.7",
         "office-ui-fabric-react": "7.156.0",
         "react": "16.9.0",
