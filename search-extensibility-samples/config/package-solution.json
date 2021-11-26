@@ -3,7 +3,7 @@
   "solution": {
     "name": "PnP Modern Search - Extensibility Library Demo",
     "id": "4896309f-54bc-48f2-a7ee-0785e019d195",
-    "version": "4.0.0.0",
+    "version": "4.1.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,

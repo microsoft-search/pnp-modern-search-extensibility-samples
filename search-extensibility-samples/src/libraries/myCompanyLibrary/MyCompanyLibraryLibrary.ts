@@ -1,9 +1,30 @@
 import { ServiceKey } from "@microsoft/sp-core-library";
-import { IExtensibilityLibrary, IComponentDefinition, ISuggestionProviderDefinition, ISuggestionProvider } from "@pnp/modern-search-extensibility";
+import {  IExtensibilityLibrary, 
+          IComponentDefinition, 
+          ISuggestionProviderDefinition, 
+          ISuggestionProvider,
+          ILayoutDefinition, 
+          LayoutType, 
+          ILayout 
+} from "@pnp/modern-search-extensibility";
 import { MyCustomComponentWebComponent } from "../CustomComponent";
+import { Customlayout } from "../CustomLayout";
 import { CustomSuggestionProvider } from "../CustomSuggestionProvider";
 
 export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
+
+  public getCustomLayouts(): ILayoutDefinition[] {
+    return [
+      {
+        name: 'PnP Custom layout',
+        iconName: 'Color',
+        key: 'CustomLayout',
+        type: LayoutType.Results,
+        templateContent: require('../custom-layout.html'),
+        serviceKey: ServiceKey.create<ILayout>('PnP:CustomLayout', Customlayout),
+      }
+    ];
+  }
 
   public getCustomWebComponents(): IComponentDefinition<any>[] {
     return [
