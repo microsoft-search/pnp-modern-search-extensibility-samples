@@ -1,5 +1,5 @@
 {
-    "name": "aequos-extensibility-demo",
+    "name": "@pnp/modern-search-extensibility-demo",
     "version": "1.0.0",
     "private": false,
     "main": "lib/index.js",
@@ -9,7 +9,7 @@
       "test": "gulp test"
     },
     "dependencies": {
-      "@pnp/modern-search-extensibility": "1.0.8",
+      "@pnp/modern-search-extensibility": "1.0.9",
       "@microsoft/sp-component-base": "1.12.1",
       "@microsoft/sp-core-library": "1.12.1",
       "@microsoft/sp-http": "1.12.1",
