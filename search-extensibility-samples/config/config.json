@@ -9,10 +9,19 @@
           "manifest": "./src/libraries/myCompanyLibrary/MyCompanyLibraryLibrary.manifest.json"
         }
       ]
+    },
+    "export-to-csv-library": {
+      "components": [
+        {
+          "entrypoint": "./lib/libraries/exportToCsvLibrary/ExportToCsvLibrary.js",
+          "manifest": "./src/libraries/exportToCsvLibrary/ExportToCsvLibrary.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "MyCompanyLibraryLibraryStrings": "lib/libraries/myCompanyLibrary/loc/{locale}.js"
+    "MyCompanyLibraryLibraryStrings": "lib/libraries/myCompanyLibrary/loc/{locale}.js",
+    "ExportToCsvLibraryStrings": "lib/libraries/exportToCsvLibrary/loc/{locale}.js"
   }
 }
