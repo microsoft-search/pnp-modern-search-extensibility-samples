@@ -4,7 +4,7 @@ import { DefaultButton, Dialog, DialogFooter, DialogType, ITheme, PrimaryButton 
 import { BaseWebComponent, IDataContext, IDataSource } from '@pnp/modern-search-extensibility';
 import { ServiceKey, ServiceScope } from '@microsoft/sp-core-library';
 import { ExportHelper } from "../helpers/ExportHelper";
-import * as strings from 'ExportToCsvLibraryStrings'
+import * as strings from 'ExportToCsvLibraryStrings';
 
 export interface IExportComponentProps {
   /**
@@ -175,7 +175,7 @@ export class ExportWebComponent extends BaseWebComponent {
   public async connectedCallback() {
     let props = this.resolveAttributes();
 
-    const columns = (props.columns || "").toString().split(',').map(s => s.trim()).filter(s => s);
+    const columns = (props.columns || "").toString().split(',').map((s: string) => s.trim()).filter((s: string) => s);
     if (!columns || !props.context) return;
 
     let serviceScope: ServiceScope = this._serviceScope; // Default is the root shared service scope regardless the current Web Part
