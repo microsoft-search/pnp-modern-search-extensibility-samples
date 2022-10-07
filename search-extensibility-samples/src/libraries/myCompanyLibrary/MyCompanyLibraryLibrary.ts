@@ -17,7 +17,7 @@ import * as Handlebars from "handlebars";
 import { MyCustomComponentWebComponent } from "../CustomComponent";
 import { Customlayout } from "../CustomLayout";
 import { CustomSuggestionProvider } from "../CustomSuggestionProvider";
-import { CustomDataSource } from "../CustomDataSource";
+import { NpmDataSource } from "../NpmDataSource";
 
 export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
   
@@ -125,10 +125,10 @@ export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
   public getCustomDataSources(): IDataSourceDefinition[] {
     return [
       {
-          name: 'Custom Data Source',
+          name: 'NPM Search',
           iconName: 'Database',
-          key: 'CustomDataSource',
-          serviceKey: ServiceKey.create<IDataSource>('CustomDataSource', CustomDataSource)
+          key: 'NpmDataSource',
+          serviceKey: ServiceKey.create<IDataSource>('NpmDataSource', NpmDataSource)
       }
     ];
   }
