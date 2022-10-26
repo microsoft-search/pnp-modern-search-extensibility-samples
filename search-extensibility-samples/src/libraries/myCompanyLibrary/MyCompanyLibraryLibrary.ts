@@ -9,12 +9,15 @@ import {  IExtensibilityLibrary,
           LayoutType, 
           ILayout,
           IAdaptiveCardAction,
-          LayoutRenderType
+          LayoutRenderType,
+          IQueryModifierDefinition,
+          IQueryModifier
 } from "@pnp/modern-search-extensibility";
 import * as Handlebars from "handlebars";
 import { MyCustomComponentWebComponent } from "../CustomComponent";
 import { Customlayout } from "../CustomLayout";
 import { CustomSuggestionProvider } from "../CustomSuggestionProvider";
+import { WordModifier } from "../WordModifier";
 
 export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
   
@@ -117,6 +120,18 @@ export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
           break;
       }
     }
+  }
+
+  public getCustomQueryModifiers(): IQueryModifierDefinition[]
+  {
+    return [
+        {
+          name: 'Word Modifier',
+          key: 'WordModifier',
+          description: 'A demo query modifier from the extensibility library',
+          serviceKey: ServiceKey.create<IQueryModifier>('MyCompany:WordModifier', WordModifier)
+      }
+    ];
   }
 
   public name(): string {
