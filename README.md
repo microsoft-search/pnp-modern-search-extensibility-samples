@@ -7,6 +7,7 @@ This project centralizes extensibility samples made by the community for the [Pn
 - Custom Handlebars helpers
 - Custom layouts
 - Custom adaptive cards actions
+- Custom data source
 
 ## Get Started
 

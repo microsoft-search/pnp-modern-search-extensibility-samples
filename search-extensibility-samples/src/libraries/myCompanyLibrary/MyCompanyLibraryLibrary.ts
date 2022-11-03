@@ -9,12 +9,15 @@ import {  IExtensibilityLibrary,
           LayoutType, 
           ILayout,
           IAdaptiveCardAction,
-          LayoutRenderType
+          LayoutRenderType,
+          IDataSourceDefinition,
+          IDataSource
 } from "@pnp/modern-search-extensibility";
 import * as Handlebars from "handlebars";
 import { MyCustomComponentWebComponent } from "../CustomComponent";
 import { Customlayout } from "../CustomLayout";
 import { CustomSuggestionProvider } from "../CustomSuggestionProvider";
+import { CustomDataSource } from "../CustomDataSource";
 
 export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
   
@@ -117,6 +120,18 @@ export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
           break;
       }
     }
+  }
+
+  public  getCustomDataSources?(): IDataSourceDefinition[]
+  {
+    return [
+      {
+        name:'Custom Data Source',
+        key:'CustomRestDataSource',
+        iconName:'NewsSearch',
+        serviceKey: ServiceKey.create<IDataSource>('MyCompany:CustomRestDataSource', CustomDataSource)
+      }
+    ];
   }
 
   public name(): string {
