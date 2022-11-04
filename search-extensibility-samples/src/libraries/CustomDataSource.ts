@@ -1,7 +1,7 @@
-import { IPropertyPaneField, IPropertyPaneGroup, PropertyPaneDropdown,PropertyPaneTextField } from "@microsoft/sp-property-pane";
+import { IPropertyPaneField, IPropertyPaneGroup, PropertyPaneDropdown, PropertyPaneTextField } from "@microsoft/sp-property-pane";
 import { ServiceScope } from '@microsoft/sp-core-library';
-import { BaseDataSource, ITokenService, FilterBehavior, PagingBehavior, IDataContext, ITemplateSlot } from '@pnp/modern-search-extensibility';
-import { AnonymousRestService } from './anonymousRestService/AnonymousRestService';
+import { BaseDataSource, ITokenService, FilterBehavior, PagingBehavior, IDataContext, ITemplateSlot, BuiltinTemplateSlots } from '@pnp/modern-search-extensibility';
+import { AnonymousRestService } from './AnonymousRestService';
 
 export interface ICustomDataSourceProperties {
 
@@ -22,9 +22,9 @@ export interface ICustomDataSourceProperties {
     bodyTemplate: string | null;
 
     /**
-    * The search query template
+    * The root key for the returned data
     */
-    queryTemplate: string;
+    rootKey?: string;
 }
 
 export class CustomDataSource extends BaseDataSource<ICustomDataSourceProperties> {
@@ -39,14 +39,23 @@ export class CustomDataSource extends BaseDataSource<ICustomDataSourceProperties
     public constructor(serviceScope: ServiceScope) {
         super(serviceScope);
 
-        serviceScope.whenFinished(() => {
-            
-            this._tokenService = serviceScope.consume<ITokenService>(this.serviceKeys.TokenService);
-            this._anonRestService = serviceScope.consume<AnonymousRestService>(AnonymousRestService.ServiceKey);
-        });
     }
 
-    public async onInit(): Promise<void> {   
+    public async onInit(): Promise<void> {
+
+        this.serviceScope.whenFinished(() => {
+
+            this._tokenService = this.serviceScope.consume<ITokenService>(this.serviceKeys.TokenService);
+            this._anonRestService = this.serviceScope.consume<AnonymousRestService>(AnonymousRestService.ServiceKey);
+        });
+
+        this.initProperties();
+    }
+
+    private initProperties() {
+        this.properties.urlTemplate = this.properties.urlTemplate || '';
+        this.properties.method = this.properties.method || 'GET';
+        this.properties.bodyTemplate = this.properties.bodyTemplate || '';
     }
 
     public getItemCount(): number {
@@ -61,28 +70,22 @@ export class CustomDataSource extends BaseDataSource<ICustomDataSourceProperties
         return PagingBehavior.Dynamic;
     }
 
-    public async getData(dataContext: IDataContext): Promise<{items:any[]}> {
+    public async getData(dataContext: IDataContext): Promise<{ items: any[] }> {
 
-        let results = {
-            items: []
-        };
-
-        results = await this.search(dataContext);
-
-        return results;
+        return await this.search();
     }
 
     public getPropertyPaneGroupsConfiguration(): IPropertyPaneGroup[] {
 
         const requestFields: IPropertyPaneField<any>[] = [];
-       
+
         requestFields.push(
             PropertyPaneTextField('dataSourceProperties.urlTemplate', {
                 value: this.properties.urlTemplate,
                 label: 'Url Template',
-                placeholder: 'e.g. http://abc/{TOKEN}?q={QueryToken}',
+                placeholder: 'e.g. https://registry.npmjs.org/-/v1/search?text={inputQueryText}&size=10',
                 multiline: false,
-                description: "Enter url template",            
+                description: "Enter url template",
             }),
             PropertyPaneDropdown('dataSourceProperties.method',
                 {
@@ -98,12 +101,19 @@ export class CustomDataSource extends BaseDataSource<ICustomDataSourceProperties
                         },
                     ]
 
-                })
+                }),
+            PropertyPaneTextField('dataSourceProperties.rootKey', {
+                value: this.properties.rootKey,
+                label: 'JSON Return Root Key',
+                placeholder: 'e.g. objects',
+                multiline: false,
+                description: "Enter key of the root array containing the search result items",
+            })
         );
 
         if (this.properties.method === 'POST') {
             requestFields.push(
-                 PropertyPaneTextField('dataSourceProperties.bodyTemplate', {
+                PropertyPaneTextField('dataSourceProperties.bodyTemplate', {
                     value: this.properties.bodyTemplate,
                     label: 'Body Template',
                     placeholder: '{ xx:yyy}',
@@ -112,7 +122,7 @@ export class CustomDataSource extends BaseDataSource<ICustomDataSourceProperties
                 }));
         }
 
-       
+
         const groupFields: IPropertyPaneField<any>[] = [
             ...requestFields
         ];
@@ -126,7 +136,7 @@ export class CustomDataSource extends BaseDataSource<ICustomDataSourceProperties
     }
 
     public onPropertyUpdate(propertyPath: string, oldValue: any, newValue: any) {
-
+        //no-code
     }
 
     public onCustomPropertyUpdate(propertyPath: string, newValue: any, changeCallback?: (targetProperty?: string, newValue?: any) => void): void {
@@ -134,36 +144,48 @@ export class CustomDataSource extends BaseDataSource<ICustomDataSourceProperties
     }
 
     public getTemplateSlots(): ITemplateSlot[] {
-        return [            
+        return [
+            {
+                slotName: BuiltinTemplateSlots.Title,
+                slotField: 'name'
+            },
+            {
+                slotName: BuiltinTemplateSlots.Path,
+                slotField: 'webUrl'
+            },
+            {
+                slotName: BuiltinTemplateSlots.Id,
+                slotField: 'key'
+            }
         ];
     }
 
     public getSortableFields(): string[] {
-        return  [];
+        return [];
     }
 
 
     /**
-     * Retrieves data from Microsoft Graph API
-     * @param searchRequest the Microsoft Search search request
+     * Retrieves data from any rest endpoint     
      */
-    private async search(dataContext: IDataContext): Promise<any> {
+    private async search(): Promise<{ items: any[] }> {
 
-        const response= {
+        const response = {
             items: []
         };
 
-        const url= await this._tokenService.resolveTokens(this.properties.urlTemplate);        
-        const body= await this._tokenService.resolveTokens(this.properties.bodyTemplate);
-        const method= this.properties.method;
+        const url = await this._tokenService.resolveTokens(this.properties.urlTemplate);
+        const body = await this._tokenService.resolveTokens(this.properties.bodyTemplate);
+        const method = this.properties.method;
 
-        const jsonResponse = await this._anonRestService.requestData(url,method,body);
+        const jsonResponse = await this._anonRestService.requestData(url, method, body);
 
-        console.log(jsonResponse);
+        if (jsonResponse) {
 
-        if (jsonResponse && Array.isArray(jsonResponse)) {
-
-            jsonResponse.forEach(item => response.items.push(item));            
+            const items = this.properties.rootKey && jsonResponse.hasOwnProperty(this.properties.rootKey) ? jsonResponse[this.properties.rootKey] : jsonResponse;
+            if (items && Array.isArray(items)) {
+                items.forEach(item => response.items.push(item));
+            }
         }
 
         this._itemsCount = response.items?.length ?? 0;
@@ -171,3 +193,4 @@ export class CustomDataSource extends BaseDataSource<ICustomDataSourceProperties
         return response;
     }
 }
+
