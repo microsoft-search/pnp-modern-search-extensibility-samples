@@ -2,12 +2,12 @@ import { BaseQueryModifier } from "@pnp/modern-search-extensibility";
 import { IPropertyPaneGroup, PropertyPaneTextField } from '@microsoft/sp-property-pane';
 import * as myLibraryStrings from 'MyCompanyLibraryLibraryStrings';
 
-export interface IWordModifierProperties {
+export interface ICustomQueryModifierProperties {
   prefix: string;
   suffix: string;
 }
 
-export class WordModifier extends BaseQueryModifier<IWordModifierProperties> {
+export class CustomQueryModifier extends BaseQueryModifier<ICustomQueryModifierProperties> {
 
   private _regex: RegExp;
 
@@ -30,17 +30,17 @@ export class WordModifier extends BaseQueryModifier<IWordModifierProperties> {
 
     return [
       {
-        groupName: myLibraryStrings.WordModifier.GroupName,
+        groupName: myLibraryStrings.CustomQueryModifier.GroupName,
         groupFields: [
           PropertyPaneTextField('queryModifierProperties.prefix', {
-            label: myLibraryStrings.WordModifier.PrefixLabel,
-            description: myLibraryStrings.WordModifier.PrefixDescription,
-            placeholder: myLibraryStrings.WordModifier.PrefixPlaceholder,
+            label: myLibraryStrings.CustomQueryModifier.PrefixLabel,
+            description: myLibraryStrings.CustomQueryModifier.PrefixDescription,
+            placeholder: myLibraryStrings.CustomQueryModifier.PrefixPlaceholder,
           }),
           PropertyPaneTextField('queryModifierProperties.suffix', {
-            label: myLibraryStrings.WordModifier.SuffixLabel,
-            description: myLibraryStrings.WordModifier.SuffixDescription,
-            placeholder: myLibraryStrings.WordModifier.SuffixPlaceholder,
+            label: myLibraryStrings.CustomQueryModifier.SuffixLabel,
+            description: myLibraryStrings.CustomQueryModifier.SuffixDescription,
+            placeholder: myLibraryStrings.CustomQueryModifier.SuffixPlaceholder,
           })
         ],
       },

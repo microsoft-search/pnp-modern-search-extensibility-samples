@@ -2,7 +2,7 @@ declare interface IMyCompanyLibraryLibraryStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   DescriptionFieldLabel: string;
-    WordModifier: {
+  CustomQueryModifier: {
       GroupName:string;
       PrefixLabel:string;
       PrefixDescription:string;

@@ -3,8 +3,8 @@ define([], function() {
     "PropertyPaneDescription": "Description",
     "BasicGroupName": "Group Name",
     "DescriptionFieldLabel": "Description Field",
-    "WordModifier": {
-      "GroupName":"WordModifier Settings",
+    "CustomQueryModifier": {
+      "GroupName":"CustomQueryModifier Settings",
       "PrefixLabel":"Prefix Text",
       "PrefixDescription":"A string to prepend to each word found in the input query text.",
       "PrefixPlaceholder":"*",
