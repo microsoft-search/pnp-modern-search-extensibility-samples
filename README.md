@@ -6,6 +6,7 @@ This project centralizes extensibility samples made by the community for the [Pn
 - Custom search box suggestions providers
 - Custom Handlebars helpers
 - Custom layouts
+- Custom adaptive cards actions
 
 ## Get Started
 
