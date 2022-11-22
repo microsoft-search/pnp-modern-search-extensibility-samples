@@ -66,7 +66,7 @@ export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
   public getCustomWebComponents(): IComponentDefinition<any>[] {
     return [
       {
-        componentName: 'my-custom-component',
+        componentName: 'adv-dialog-component',
         componentClass: MyCustomComponentWebComponent
       }
     ];
@@ -94,30 +94,26 @@ export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
 
   public invokeCardAction(action: any): void {
     
-    // Process the action based on type
-    if (action.type == "Action.OpenUrl") {
-      window.open(action.url, "_blank");
-    } else if (action.type == "Action.Submit") {
+    if (action.type == "Action.Submit") {
       // Process the action based on title
       switch (action.title) {
 
-        case 'Click on item':
+        case 'Reorder':
+
+          alert(JSON.stringify(`You ordered ${action.data.orderQuantity} items!`));
 
            // Invoke the currentUser endpoing
-           this._spHttpClient.get(
+           /*this._spHttpClient.get(
             `${this._currentWebUrl}/_api/web/currentUser`,
             SPHttpClient.configurations.v1, 
             null).then((response: SPHttpClientResponse) => {
               response.json().then((json) => {
                 console.log(JSON.stringify(json));
               });
-            });
+            });*/
 
           break;
-
-        case 'Global click':
-          alert(JSON.stringify(action.data));
-          break;
+        
         default:
           console.log('Action not supported!');
           break;
