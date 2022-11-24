@@ -9,12 +9,18 @@ import {  IExtensibilityLibrary,
           LayoutType, 
           ILayout,
           IAdaptiveCardAction,
-          LayoutRenderType
+          LayoutRenderType,
+          IQueryModifierDefinition,
+          IQueryModifier,
+          IDataSourceDefinition,
+          IDataSource
 } from "@pnp/modern-search-extensibility";
 import * as Handlebars from "handlebars";
 import { MyCustomComponentWebComponent } from "../CustomComponent";
 import { Customlayout } from "../CustomLayout";
 import { CustomSuggestionProvider } from "../CustomSuggestionProvider";
+import { CustomQueryModifier } from "../CustomQueryModifier";
+import { CustomDataSource } from "../CustomDataSource";
 
 export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
   
@@ -117,6 +123,30 @@ export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
           break;
       }
     }
+  }
+
+  public getCustomQueryModifiers(): IQueryModifierDefinition[]
+  {
+    return [
+      {
+        name: 'Word Modifier',
+        key: 'WordModifier',
+        description: 'A demo query modifier from the extensibility library',
+        serviceKey: ServiceKey.create<IQueryModifier>('MyCompany:CustomQueryModifier', CustomQueryModifier)
+
+      }
+    ];
+  
+    }
+  public getCustomDataSources(): IDataSourceDefinition[] {
+    return [
+      {
+          name: 'NPM Search',
+          iconName: 'Database',
+          key: 'CustomDataSource',
+          serviceKey: ServiceKey.create<IDataSource>('MyCompany:CustomDataSource', CustomDataSource)
+      }
+    ];
   }
 
   public name(): string {
