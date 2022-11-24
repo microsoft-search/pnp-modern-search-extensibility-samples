@@ -11,6 +11,7 @@
   "dependencies": {
     "@pnp/modern-search-extensibility": "1.5.0",
     "@microsoft/sp-component-base": "1.15.2",
+    "@microsoft/sp-page-context": "1.15.2",
     "@microsoft/sp-core-library": "1.15.2",
     "@microsoft/sp-http": "1.15.2",
     "@microsoft/sp-lodash-subset": "1.15.2",

@@ -8,11 +8,12 @@ specifiers:
   '@microsoft/sp-http': 1.15.2
   '@microsoft/sp-lodash-subset': 1.15.2
   '@microsoft/sp-module-interfaces': 1.15.2
+  '@microsoft/sp-page-context': 1.15.2
   '@microsoft/sp-property-pane': 1.15.2
   '@microsoft/sp-tslint-rules': 1.15.2
   '@microsoft/sp-webpart-base': 1.15.2
   '@microsoft/sp-webpart-workbench': 1.12.1
-  '@pnp/modern-search-extensibility': 1.4.15
+  '@pnp/modern-search-extensibility': 1.5.0
   '@types/es6-promise': 0.0.33
   '@types/react': 16.9.36
   '@types/react-dom': 16.9.8
@@ -35,9 +36,10 @@ dependencies:
   '@microsoft/sp-core-library': 1.15.2
   '@microsoft/sp-http': 1.15.2
   '@microsoft/sp-lodash-subset': 1.15.2
+  '@microsoft/sp-page-context': 1.15.2
   '@microsoft/sp-property-pane': 1.15.2_lcv6rothd4t5tgayd7hxxmjf24
   '@microsoft/sp-webpart-base': 1.15.2_lcv6rothd4t5tgayd7hxxmjf24
-  '@pnp/modern-search-extensibility': 1.4.15_lcv6rothd4t5tgayd7hxxmjf24
+  '@pnp/modern-search-extensibility': 1.5.0_lcv6rothd4t5tgayd7hxxmjf24
   '@types/es6-promise': 0.0.33
   '@types/webpack-env': 1.13.1
   '@webcomponents/custom-elements': 1.4.0
@@ -1958,8 +1960,8 @@ packages:
     deprecated: Package renamed to @opentelemetry/api, see https://github.com/open-telemetry/opentelemetry-js
     dev: true
 
-  /@pnp/modern-search-extensibility/1.4.15_lcv6rothd4t5tgayd7hxxmjf24:
-    resolution: {integrity: sha512-xX9yTiYPDgbfSwlJz/DOZakRx8KCF/vpEe1eAdtKZuxnnQ+GcMumevQf7kJn4zKNAQSerEyqshvS/yNOO26P3g==}
+  /@pnp/modern-search-extensibility/1.5.0_lcv6rothd4t5tgayd7hxxmjf24:
+    resolution: {integrity: sha512-YwEsME91IuKot2+vqxWQrStsOdqaqZu8tzdwIlonH6aTGl0tmGha/eNf6KMmhssi0Neq5I5Yit824/16pqBRwg==}
     dependencies:
       '@microsoft/sp-component-base': 1.15.2_lcv6rothd4t5tgayd7hxxmjf24
       '@microsoft/sp-core-library': 1.15.2
@@ -6290,6 +6292,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     dev: true
 
   /fill-range/4.0.0:
@@ -8500,7 +8503,7 @@ packages:
     resolution: {integrity: sha1-o6vicYryQaKykE+EpiWXDzia4yo=}
 
   /js-tokens/3.0.2:
-    resolution: {integrity: sha1-mGbfOVECEw449/mWvOtlRDIJwls=}
+    resolution: {integrity: sha512-RjTcuD4xjtthQkaWH7dFlH85L+QaVtSoOyGdZ3g6HFhS9dFNDfLyqgm2NFe2X6cQpeFmt0452FJjFG5UameExg==}
     dev: true
 
   /js-tokens/4.0.0:
@@ -9527,6 +9530,7 @@ packages:
 
   /nan/2.15.0:
     resolution: {integrity: sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==}
+    requiresBuild: true
     dev: true
     optional: true
 
