@@ -8,7 +8,7 @@ export interface ICustomLayoutProperties {
     myTextProperty: string;
 }
 
-export class Customlayout extends BaseLayout<ICustomLayoutProperties> {
+export class CustomLayout extends BaseLayout<ICustomLayoutProperties> {
 
     public getPropertyPaneFieldsConfiguration(availableFields: string[]): IPropertyPaneField<any>[] {
 

@@ -38,28 +38,32 @@ export interface ICustomComponenState {
 }
 
 export class CustomComponent extends React.Component<ICustomComponentProps, ICustomComponenState> {
-    
+
     public render() {
 
         // Parse custom object
         const myObject: IObjectParam = this.props.myObjectParam;
 
-        return  <div>
-                    {this.props.myStringParam} {myObject.myProperty}
-                </div>;
+        return <div>
+            {this.props.myStringParam} {myObject.myProperty}
+        </div>;
     }
 }
 
 export class MyCustomComponentWebComponent extends BaseWebComponent {
-   
+
     public constructor() {
-        super(); 
+        super();
     }
- 
+
     public async connectedCallback() {
- 
-       let props = this.resolveAttributes();
-       const customComponent = <CustomComponent {...props}/>;
-       ReactDOM.render(customComponent, this);
+
+        let props = this.resolveAttributes();
+        const customComponent = <CustomComponent {...props} />;
+        ReactDOM.render(customComponent, this);
     }    
+
+    protected onDispose(): void {
+        ReactDOM.unmountComponentAtNode(this);
+    }
 }

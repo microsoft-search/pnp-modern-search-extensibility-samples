@@ -1,9 +1,9 @@
 import { BaseDataSource, BuiltinTemplateSlots, IDataContext, IDataSourceData, ITemplateSlot, PagingBehavior } from "@pnp/modern-search-extensibility";
-import { IPropertyPaneGroup, PropertyPaneTextField } from '@microsoft/sp-property-pane';
+import { IPropertyPaneGroup } from '@microsoft/sp-property-pane';
 import { PropertyPaneLabel } from "@microsoft/sp-property-pane";
 import { PropertyPaneSlider } from "@microsoft/sp-property-pane";
 import { ServiceScope } from "@microsoft/sp-core-library";
-import { HttpClient, HttpClientConfiguration } from "@microsoft/sp-http";
+import { HttpClient } from "@microsoft/sp-http";
 
 export interface ICustomDataSourceProperties {
   qualityEffect: number;

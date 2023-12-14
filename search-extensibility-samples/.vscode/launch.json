@@ -4,11 +4,12 @@
    * Chrome browser: https://aka.ms/spfx-debugger-extensions
    */
   "version": "0.2.0",
-  "configurations": [{
+  "configurations": [
+    {
       "name": "Local workbench",
-      "type": "chrome",
+      "type": "msedge",
       "request": "launch",
-      "url": "https://localhost:4321/temp/workbench.html",
+      "url": "https://{tenantDomain}/_layouts/workbench.aspx",
       "webRoot": "${workspaceRoot}",
       "sourceMaps": true,
       "sourceMapPathOverrides": {
@@ -17,9 +18,7 @@
         "webpack:///../../../../src/*": "${webRoot}/src/*",
         "webpack:///../../../../../src/*": "${webRoot}/src/*"
       },
-      "runtimeArgs": [
-        "--remote-debugging-port=9222"
-      ]
+      "runtimeArgs": ["--remote-debugging-port=9222"]
     },
     {
       "name": "Hosted workbench",
@@ -34,10 +33,7 @@
         "webpack:///../../../../src/*": "${webRoot}/src/*",
         "webpack:///../../../../../src/*": "${webRoot}/src/*"
       },
-      "runtimeArgs": [
-        "--remote-debugging-port=9222",
-        "-incognito"
-      ]
+      "runtimeArgs": ["--remote-debugging-port=9222", "-incognito"]
     }
   ]
 }

@@ -8,7 +8,6 @@ import {  IExtensibilityLibrary,
           ILayoutDefinition, 
           LayoutType, 
           ILayout,
-          IAdaptiveCardAction,
           LayoutRenderType,
           IQueryModifierDefinition,
           IQueryModifier,
@@ -17,7 +16,7 @@ import {  IExtensibilityLibrary,
 } from "@pnp/modern-search-extensibility";
 import * as Handlebars from "handlebars";
 import { MyCustomComponentWebComponent } from "../CustomComponent";
-import { Customlayout } from "../CustomLayout";
+import { CustomLayout } from "../CustomLayout";
 import { CustomSuggestionProvider } from "../CustomSuggestionProvider";
 import { CustomQueryModifier } from "../CustomQueryModifier";
 import { CustomDataSource } from "../CustomDataSource";
@@ -49,7 +48,7 @@ export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
         type: LayoutType.Results,
         renderType: LayoutRenderType.Handlebars,
         templateContent: require('../custom-layout.html'),
-        serviceKey: ServiceKey.create<ILayout>('PnP:CustomLayoutHandlebars', Customlayout),
+        serviceKey: ServiceKey.create<ILayout>('PnP:CustomLayoutHandlebars', CustomLayout),
       },
       {
         name: 'PnP Custom layout (Adaptive Cards)',
@@ -58,7 +57,7 @@ export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
         type: LayoutType.Results,
         renderType: LayoutRenderType.AdaptiveCards,
         templateContent: JSON.stringify(require('../custom-layout.json'), null, "\t"),
-        serviceKey: ServiceKey.create<ILayout>('PnP:CustomLayoutAdaptive', Customlayout),
+        serviceKey: ServiceKey.create<ILayout>('PnP:CustomLayoutAdaptive', CustomLayout),
       }
     ];
   }
