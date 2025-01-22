@@ -5,6 +5,7 @@ This project centralizes extensibility samples made by the community for the [Pn
 - Custom web components
 - Custom search box suggestions providers
 - Custom Handlebars helpers
+- Custom layouts
 - Custom data sources
 - Custom adaptive cards actions
 - Custom query modifiers
