@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "extensibility-demo-library": {
+      "components": [
+        {
+          "entrypoint": "./lib/libraries/extensibilityDemoLibrary/ExtensibilityDemoLibrary.js",
+          "manifest": "./src/libraries/extensibilityDemoLibrary/ExtensibilityDemoLibrary.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ExtensibilityDemoLibraryStrings": "lib/libraries/extensibilityDemoLibrary/loc/{locale}.js"
+  }
+}

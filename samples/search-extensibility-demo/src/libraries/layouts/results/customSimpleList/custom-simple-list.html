@@ -1,0 +1,369 @@
+<content id="data-content">
+
+    <style>
+        /* Insert your CSS overrides here */
+
+        .example-themePrimary a {
+            color: {{@root.theme.palette.themePrimary}};
+        }
+
+        .template--listItem {
+            position: relative;
+            align-items: flex-end;
+            padding: 24px 0;
+
+            border-bottom: 1px solid {{@root.theme.palette.themeLight}};
+        }
+
+        .template--listItem--contentContainer .origin-site {
+            margin-top: -6px;
+            margin-bottom: 12px;
+        }
+
+        .template--listItem--contentContainer .origin-site a {
+            text-decoration: none;
+        }
+
+        .template--listItem--contentContainer .origin-site a:hover {
+            text-decoration: underline;
+        }
+
+        .item-main-content {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .item-main-content .metadata {
+            width: 100%;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            color: #605E5C;
+            /* display: flex; */
+        }
+
+        .item-main-content .metadata .metadata-result {
+            flex-direction: row;
+            align-items: center;
+            font-weight: 400;
+            font-size: 14px;
+
+            color: {{@root.theme.palette.topBarText}};
+        }
+
+        .item-main-content .metadata .metadata-result strong {
+            color: black;
+        }
+
+        .item-main-content .metadata .metadata-label {
+            /* color: #605E5C; */
+            font-weight: 600;
+            font-size: 14px;
+            word-break: keep-all;
+
+            color: {{@root.theme.palette.topBarText}};
+        }
+
+        .template--listItem .template--listItem--thumbnailContainer {
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-bottom: 0px;
+            max-width: 170px;
+            border: solid 1px #ccc;
+        }
+
+        .template--listItem .template--listItem--thumbnailContainer .thumbnail--image img {
+            width: 170px;
+        }
+
+        div[class^='collapsible__filterPanel__body__group__header_']>* {
+            font-weight: 600;
+            font-size: 14px;
+            word-break: keep-all;
+
+            color: {{ @root.theme.palette.topBarText}};
+        }
+
+        .template--listItem--title {
+            display: flex;
+            gap: 20px;
+        }
+    </style>
+
+    <div class="template">
+
+        {{#if @root.properties.showSelectedFilters}}
+        <pnp-selectedfilters data-filters="{{JSONstringify filters.selectedFilters 2}}"
+            data-filters-configuration="{{JSONstringify filters.filtersConfiguration 2}}"
+            data-instance-id="{{filters.instanceId}}" data-operator="{{filters.filterOperator}}"
+            data-theme-variant="{{JSONstringify @root.theme}}">
+        </pnp-selectedfilters>
+        {{/if}}
+        <div class="template--header">
+            {{#if @root.properties.showResultsCount}}
+            <div class="template--resultCount">
+                <label class="ms-fontWeight-semibold">{{getCountMessage @root.data.totalItemsCount
+                    @root.inputQueryText}}</label>
+            </div>
+            {{/if}}
+
+            <div class="template--sort">
+                <pnp-sortfield data-fields="{{JSONstringify @root.properties.dataSourceProperties.sortList}}"
+                    data-default-selected-field="{{sort.selectedSortFieldName}}"
+                    data-default-direction="{{sort.selectedSortDirection}}"
+                    data-theme-variant="{{JSONstringify @root.theme}}">
+                </pnp-sortfield>
+            </div>
+        </div>
+        {{#if @root.data.promotedResults}}
+        <ul class="template--defaultList template--promotedResults">
+            {{#each @root.data.promotedResults as |promotedResult|}}
+            <li>
+                <div>
+                    <pnp-icon data-name="MiniLink" aria-hidden="true"></pnp-icon>
+                </div>
+                <div>
+                    <a href="{{url}}" style="color:{{@root.theme.semanticColors.link}}">{{title}}</a>
+                    <div>{{description}}</div>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+        {{/if}}
+        <ul class="template--defaultList">
+            {{#each data.items as |item|}}
+            <pnp-select data-enabled="{{@root.properties.itemSelectionProps.allowItemSelection}}"
+                data-index="{{@index}}" data-is-selected="{{isItemSelected @root.selectedKeys @index}}">
+
+                <template id="content">
+
+                    <li class="template--listItem">
+                        {{#> resultTypes item=item}}
+                        <div class="template--listItem--result">
+                            {{#if @root.properties.layoutProperties.showFileIcon}}
+                            {{#contains "['STS_Site','STS_Web']" (slot item @root.slots.contentclass)}}
+                            <pnp-iconfile class="template--listItem--icon"
+                                data-extension="{{slot item @root.slots.FileType}}"
+                                data-is-container="{{slot item @root.slots.IsFolder}}"
+                                data-image-url="{{item.SiteLogo}}" data-size="32"
+                                data-theme-variant="{{JSONstringify @root.theme}}"></pnp-iconfile>
+                            {{else}}
+                            <pnp-iconfile class="template--listItem--icon"
+                                data-extension="{{slot item @root.slots.FileType}}"
+                                data-is-container="{{slot item @root.slots.IsFolder}}" data-size="32"
+                                data-theme-variant="{{JSONstringify @root.theme}}"></pnp-iconfile>
+                            {{/contains}}
+                            {{/if}}
+
+                            <div class="template--listItem--contentContainer">
+                                <span class="template--listItem--title example-themePrimary">
+                                    {{#if @root.properties.openLinkInNewTab}}
+                                    <a href="{{slot item @root.slots.PreviewUrl}}" target="_blank"
+                                        style="color:{{@root.theme.semanticColors.link}}" data-interception="off"
+                                        rel="noopener noreferrer">{{slot item @root.slots.Title}}</a>
+                                    {{else}}
+                                    <a href="{{slot item @root.slots.PreviewUrl}}" target="_self"
+                                        style="color:{{@root.theme.semanticColors.link}}" data-interception="off"
+                                        rel="noopener noreferrer">{{slot item @root.slots.Title}}</a>
+                                    {{/if}}
+                                    {{#eq (slot item @root.slots.IsFeatured) '1'}}
+                                    <pnp-icon data-name="FavoriteStarFill" aria-hidden="true"></pnp-icon>
+                                    {{/eq}}
+                                </span>
+
+
+
+                                {{#if @root.slots.OriginSiteTitle}}
+                                {{#if @root.slots.OriginSiteUrl}}
+                                {{#if @root.slots.Web}}
+                                <span class="origin-site">
+                                    <a href="{{slot item @root.slots.Web}}" data-interception="off" target="_blank"
+                                        style="color:{{@root.theme.semanticColors.link}}">{{slot
+                                        item @root.slots.OriginSiteTitle}}</a>
+                                </span>
+                                {{else}}
+                                <span class="origin-site">
+                                    <a href="{{slot item @root.slots.OriginSiteUrl}}" data-interception="off"
+                                        target="_blank" style="color:{{@root.theme.semanticColors.link}}">{{slot
+                                        item @root.slots.OriginSiteTitle}}</a>
+                                </span>
+                                {{/if}}
+                                {{/if}}
+                                {{/if}}
+
+                                <div class="item-main-content">
+                                    {{#if (slot item @root.slots.ProjectSummary)}}
+                                    <div class="metadata">
+                                        <span class="metadata-result">{{trim (slot item
+                                            @root.slots.ProjectSummary)}}</span>
+                                    </div>
+                                    {{/if}}
+                                </div>
+                                <div class="item-main-content">
+                                    {{#if (slot item @root.slots.ProjectEndDate)}}
+                                    <div class="metadata">
+                                        <span class="metadata-label">End Date:&nbsp;</span>
+                                        <span class="metadata-result">{{getDate (slot item @root.slots.ProjectEndDate)
+                                            "ll"}}</span>
+                                    </div>
+                                    {{/if}}
+                                </div>
+                                <div class="item-main-content">
+                                    {{#if (slot item @root.slots.ClientCode)}}
+                                    <div class="metadata">
+                                        <span class="metadata-label">Client Code:&nbsp;</span>
+                                        <span class="metadata-result">
+                                            {{#each (split (slot item @root.slots.ClientCode) ";") as |tag| }}
+                                            <span>{{trim tag}}&semi;&nbsp;</span>
+                                            {{/each}}
+                                        </span>
+                                    </div>
+                                    {{/if}}
+                                </div>
+                                <div class="item-main-content">
+                                    {{#or (slot item @root.slots.Capabilities) (slot item @root.slots.IssueAreas) (slot
+                                    item @root.slots.Segments) (slot item @root.slots.GeographicLocations)}}
+                                    <pnp-collapsible data-group-name="Show more" data-default-collapsed="true">
+                                        <template id="collapsible-content">
+                                            {{#if (slot item @root.slots.Capabilities)}}
+                                            <div class="item-main-content">
+                                                <div class="metadata">
+                                                    <span class="metadata-label">Capabilities:&nbsp;</span>
+                                                    <span class="metadata-result">
+                                                        {{#each (split (slot item @root.slots.Capabilities) ";") as
+                                                        |tag| }}
+                                                        <span>{{trim tag}}&semi;&nbsp;</span>
+                                                        {{/each}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            {{/if}}
+
+
+                                            {{#if (slot item @root.slots.IssueAreas)}}
+                                            <div class="item-main-content">
+                                                <div class="metadata">
+                                                    <!-- <pnp-icon data-name="Tag" aria-hidden="true" data-theme-variant="{{JSONstringify @root.theme}}"></pnp-icon> -->
+                                                    <span class="metadata-label">Issue Areas:&nbsp;</span>
+                                                    <span class="metadata-result">
+                                                        {{#each (split (slot item @root.slots.IssueAreas) ";") as |tag|
+                                                        }}
+                                                        <span>{{trim tag}}&semi;&nbsp;</span>
+                                                        {{/each}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            {{/if}}
+                                            {{#if (slot item @root.slots.Segments)}}
+                                            <div class="item-main-content">
+                                                <div class="metadata">
+                                                    <span class="metadata-label">Segments:&nbsp;</span>
+                                                    <span class="metadata-result">
+                                                        {{#each (split (slot item @root.slots.Segments) ";") as |tag| }}
+                                                        <span>{{trim tag}}&semi;&nbsp;</span>
+                                                        {{/each}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            {{/if}}
+                                            {{#if (slot item @root.slots.GeographicLocations)}}
+                                            <div class="item-main-content">
+                                                <div class="metadata">
+                                                    <span class="metadata-label">Geographic Locations:&nbsp;</span>
+                                                    <span class="metadata-result">
+                                                        {{#each (split (slot item @root.slots.GeographicLocations) ";")
+                                                        as
+                                                        |tag| }}
+                                                        <span>{{trim tag}}&semi;&nbsp;</span>
+                                                        {{/each}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            {{/if}}
+                                            {{#if (slot item @root.slots.ProjectSummary)}}
+                                            {{{wasTrimmed (slot item @root.slots.ProjectSummary)}}}
+                                            {{/if}}
+                                        </template>
+                                    </pnp-collapsible>
+                                    {{/or}}
+                                </div>
+                            </div>
+
+                            {{#if @root.properties.layoutProperties.showItemThumbnail}}
+                            <div class="template--listItem--thumbnailContainer" data-selection-disabled="true">
+                                <div class="thumbnail--image">
+                                    <pnp-filepreview data-preview-url="{{slot item @root.slots.PreviewUrl}}"
+                                        data-preview-image-url="{{slot item @root.slots.PreviewImageUrl}}"
+                                        data-theme-variant="{{JSONstringify @root.theme}}">
+                                        <pnp-img alt='preview-image' width="120"
+                                            src="{{slot item @root.slots.PreviewImageUrl}}" loading="lazy"
+                                            data-error-image="{{@root.utils.defaultImage}}" />
+                                    </pnp-filepreview>
+                                    <div class="thumbnail--hover">
+                                        <div>
+                                            <pnp-icon data-name="DocumentSearch" aria-hidden="true"></pnp-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/if}}
+                            {{/resultTypes}}
+                    </li>
+                </template>
+
+            </pnp-select>
+            {{/each}}
+        </ul>
+
+        {{#if @root.properties.paging.showPaging}} {{#gt @root.data.totalItemsCount
+        @root.properties.paging.itemsCountPerPage}}
+        <pnp-pagination data-total-items="{{@root.data.totalItemsCount}}"
+            data-hide-first-last-pages="{{@root.properties.paging.hideFirstLastPages}}"
+            data-hide-disabled="{{@root.properties.paging.hideDisabled}}"
+            data-hide-navigation="{{@root.properties.paging.hideNavigation}}"
+            data-range="{{@root.properties.paging.pagingRange}}"
+            data-items-count-per-page="{{@root.properties.paging.itemsCountPerPage}}"
+            data-current-page-number="{{@root.paging.currentPageNumber}}"
+            data-theme-variant="{{JSONstringify @root.theme}}">
+        </pnp-pagination>
+        {{/gt}} {{/if}}
+
+    </div>
+</content>
+
+<content id="placeholder-content">
+    <style>
+        /* Insert your CSS overrides here */
+    </style>
+
+    <div class="placeholder">
+        {{#if @root.properties.showResultsCount}}
+        <div class="template--resultCount">
+            <span class="placeholder--shimmer placeholder--line" style="width: 20%"></span>
+        </div>
+        {{/if}}
+        <ul class="template--defaultList">
+            {{#times @root.properties.paging.itemsCountPerPage}}
+            <li class="template--listItem" tabindex="0">
+                <div class="template--listItem--result">
+
+                    <div class="template--listItem--icon placeholder--shimmer "></div>
+
+                    <div class="template--listItem--contentContainer">
+                        <span class="placeholder--shimmer placeholder--line" style="width: 60%"></span>
+                        <span class="placeholder--shimmer placeholder--line" style="width: 100%"></span>
+                        <span class="placeholder--shimmer placeholder--line" style="width: 100%"></span>
+                        <span class="placeholder--shimmer placeholder--line" style="width: 35%"></span>
+                        <span class="placeholder--shimmer placeholder--line" style="width: 20%"></span>
+                    </div>
+                </div>
+                <div class="template--listItem--thumbnailContainer">
+                    <div class="thumbnail--image">
+                        <div class="placeholder--shimmer" style="width: 120px;height: 70px;"></div>
+                    </div>
+                </div>
+            </li>
+            {{/times}}
+        </ul>
+    </div>
+
+</content>

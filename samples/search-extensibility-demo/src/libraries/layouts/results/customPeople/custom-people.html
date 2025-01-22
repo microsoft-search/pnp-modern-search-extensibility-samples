@@ -1,0 +1,176 @@
+<content id="data-content">
+
+    <style>
+        mgt-person {
+            --initials-background-color: {
+                    {
+                    @root.theme.palette.themePrimary
+                }
+            }
+
+            ;
+        }
+
+        .customPersonaLink:hover {
+            text-decoration: none;
+        }
+        .additional-details .section .section__header {
+            display: flex;
+            flex-direction: row;
+        }
+        .additional-details .section .section__header {
+            flex-grow: 1;
+            color: var(--title-color-subtitle, #323130);
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .additional-details .section .section__content{
+            margin-top: 14px;
+            color: var(--color-sub1,#323130);
+            font-size: 14px;
+            font-weight: 400;
+        }
+        .additional-details .section{
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .additional-details .section:not(:first-child){
+            padding-top: 14px;
+        }
+        .additional-details .section:is(:first-child){
+            padding-bottom: 14px;
+        }
+        .additional-details .section:not(:last-child) {
+            border-bottom: 1px solid var(--tab-line-color,#edebe9);
+
+        }
+       
+        .template--peopleListItem {
+            position: relative;
+            align-items: flex-end;
+            padding: 24px 0;
+            border-bottom: 1px solid {{@root.theme.palette.themeLight}};
+        }
+        .pronouns{
+            display: inline;
+            font-style: italic;
+            font-weight : 400;
+            font-size: 14px !important
+        }
+    </style>
+
+    <div class="template">
+
+        {{#if @root.properties.showSelectedFilters}}
+        <pnp-selectedfilters data-filters="{{JSONstringify filters.selectedFilters 2}}"
+            data-filters-configuration="{{JSONstringify filters.filtersConfiguration 2}}"
+            data-instance-id="{{filters.instanceId}}" data-operator="{{filters.filterOperator}}"
+            data-theme-variant="{{JSONstringify @root.theme}}">
+        </pnp-selectedfilters>
+        {{/if}}
+
+        <div class="template--header">
+            {{#if @root.properties.showResultsCount}}
+            <div class="template--resultCount">
+                <label class="ms-fontWeight-semibold">{{getCountMessage @root.data.totalItemsCount
+                    @root.inputQueryText}}</label>
+            </div>
+            {{/if}}
+
+            <div class="template--sort">
+                <pnp-sortfield data-fields="{{JSONstringify @root.properties.dataSourceProperties.sortList}}"
+                    data-default-selected-field="{{sort.selectedSortFieldName}}"
+                    data-default-direction="{{sort.selectedSortDirection}}"
+                    data-theme-variant="{{JSONstringify @root.theme}}">
+                </pnp-sortfield>
+            </div>
+        </div>
+
+        <div>
+            <ul class="template--defaultList">
+                {{#each data.items as |item|}}
+                <pnp-select data-enabled="{{@root.properties.itemSelectionProps.allowItemSelection}}"
+                    data-index="{{@index}}" data-is-selected="{{isItemSelected @root.selectedKeys @index}}">
+
+                    <template id="content">
+                        <li class="template--peopleListItem" tabindex="0">
+                            {{#> resultTypes item=item}}
+
+                            {{#if (slot item @root.slots.PersonQuery)}}
+                            <mgt-person user-id="{{getUserEmail (slot item @root.slots.PersonQuery)}}"
+                                person-card="hover">
+                                <template>
+                                    <custom-persona
+                                        data-image-url="/_layouts/15/userphoto.aspx?size=L&username={{getUserEmail (slot item @root.slots.UserEmail)}}"
+                                        data-user-display-name="{{slot item @root.slots.UserDisplayName}}"
+                                        data-job-title="{{slot item @root.slots.JobTitle}}"
+                                        data-user-email="{{getUserEmail (slot item @root.slots.UserEmail)}}"
+                                        data-office="{{slot item @root.slots.Office}}"
+                                        data-pronouns="{{slot item @root.slots.Pronouns}}"
+                                        data-item="{{JSONstringify item}}" data-persona-size="15"
+                                        data-theme-variant="{{JSONstringify @root.theme}}"
+                                        data-instance-id="{{@root.instanceId}}"
+                                        data-profile-page-url="{{@root.properties.layoutProperties.profilePageURL}}"
+                                        data-context="{{JSONstringify @root}}">
+                                    </custom-persona>
+                                </template>
+                                <template data-type="person-card">
+
+                                    <custom-person-card data-assistant-email="{{slot item @root.slots.Assistant}}"
+                                    data-pronouns = "{{slot item @root.slots.Pronouns}}"
+                                    >
+                                    </custom-person-card>
+                                </template>
+                            </mgt-person>
+                            {{/if}}
+
+                            {{/resultTypes}}
+                        </li>
+                    </template>
+
+                </pnp-select>
+                {{/each}}
+            </ul>
+        </div>
+
+        {{#if @root.properties.paging.showPaging}}
+
+        {{#gt @root.data.totalItemsCount @root.properties.paging.itemsCountPerPage}}
+        <pnp-pagination data-total-items="{{@root.data.totalItemsCount}}"
+            data-hide-first-last-pages="{{@root.properties.paging.hideFirstLastPages}}"
+            data-hide-disabled="{{@root.properties.paging.hideDisabled}}"
+            data-hide-navigation="{{@root.properties.paging.hideNavigation}}"
+            data-range="{{@root.properties.paging.pagingRange}}"
+            data-items-count-per-page="{{@root.properties.paging.itemsCountPerPage}}"
+            data-current-page-number="{{@root.paging.currentPageNumber}}"
+            data-theme-variant="{{JSONstringify @root.theme}}">
+        </pnp-pagination>
+        {{/gt}}
+
+        {{/if}}
+
+    </div>
+
+</content>
+
+<content id="placeholder-content">
+    <div class="placeholder">
+
+        {{#if @root.properties.showResultsCount}}
+        <div class="template--resultCount">
+            <span class="placeholder--shimmer placeholder--line" style="width: 20%"></span>
+        </div>
+        {{/if}}
+
+        <div>
+            <ul class="template--defaultList">
+                {{#times @root.properties.paging.itemsCountPerPage}}
+                <pnp-personashimmers data-persona-size="{{@root.properties.layoutProperties.personaSize}}"
+                    data-theme-variant="{{JSONstringify @root.theme}}">
+                </pnp-personashimmers>
+                {{/times}}
+            </ul>
+        </div>
+    </div>
+</content>
