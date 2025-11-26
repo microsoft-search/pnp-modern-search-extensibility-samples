@@ -1,7 +1,8 @@
-import { BaseSuggestionProvider, ISuggestion } from '@aequos/extensibility';
+import { BaseSuggestionProvider } from '@pnp/modern-search-extensibility';
 import { IPropertyPaneGroup } from '@microsoft/sp-property-pane';
 import { SPFI, spfi, SPFx } from "@pnp/sp";
 import "@pnp/sp/search";
+import { ISuggestion } from '@pnp/modern-search-extensibility';
 
 export interface IPageSuggestionProviderProperties {
   maxSuggestions?: number;
