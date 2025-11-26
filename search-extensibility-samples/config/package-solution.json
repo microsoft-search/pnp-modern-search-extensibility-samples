@@ -1,21 +1,40 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "PnP Modern Search - Extensibility Library Demo",
-    "id": "4896309f-54bc-48f2-a7ee-0785e019d195",
-    "version": "4.1.0.0",
+    "name": "sharepoint-pages-suggester-client-side-solution",
+    "id": "8ab57633-bb5e-4f15-a988-e73b5e6e2e56",
+    "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "developer": {
-      "mpnId": "",
-      "name": "PnP Team",
-      "termsOfUseUrl": "https://github.com/microsoft-search/pnp-modern-search/blob/main/LICENSE",
+      "name": "Digital Search Team",
+      "websiteUrl": "",
       "privacyUrl": "",
-      "websiteUrl": "https://pnp.github.io/"
-    }
+      "termsOfUseUrl": "",
+      "mpnId": ""
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "SharePoint Pages Suggester - Smart page recommendations for Modern Search"
+      },
+      "longDescription": {
+        "default": "Provides intelligent keyword suggestions from SharePoint Site Pages based on titles, descriptions, and popularity analytics. Features view-count sorting and trending pages display."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "SharePoint Pages Suggester Feature",
+        "description": "Activates the SharePoint Pages Suggester Library for PnP Modern Search.",
+        "id": "efc547e1-cfe2-4a18-b3d5-a2f33983de69",
+        "version": "1.0.0.0"
+      }
+    ]
   },
   "paths": {
-    "zippedPackage": "solution/pnp-modern-search-extensibility-demo.sppkg"
+    "zippedPackage": "solution/sharepoint-pages-suggester-client-side-solution.sppkg"
   }
 }

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/library-manifest.schema.json",
+  "id": "147c6703-aef6-4538-a746-3d03db9f7ffa",
+  "alias": "SharePointPagesSuggesterLibrary",
+  "componentType": "Library",
+  "version": "*",
+  "manifestVersion": 2,
+  "loaderConfig": {
+    "entryModuleId": "sharepoint-pages-suggester-library",
+    "internalModuleBaseUrls": [
+      "https://localhost:4321/"
+    ]
+  }
+}
