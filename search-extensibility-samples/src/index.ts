@@ -1,1 +1,1 @@
-export { MyCompanyLibraryLibrary } from './libraries/myCompanyLibrary/MyCompanyLibraryLibrary';
+export { PagesSuggesterLibrary } from './libraries/pagesSuggester/PagesSuggesterLibrary';
