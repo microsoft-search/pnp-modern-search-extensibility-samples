@@ -1,0 +1,26 @@
+{
+  "extends": "@microsoft/sp-tslint-rules/base-tslint.json",
+  "rules": {
+    "class-name": true,
+    "export-name": false,
+    "forin": true,
+    "label-position": true,
+    "no-arg": true,
+    "no-console": false,
+    "no-construct": true,
+    "no-duplicate-variable": true,
+    "no-eval": true,
+    "no-internal-module": true,
+    "no-shadowed-variable": true,
+    "no-switch-case-fall-through": true,
+    "no-unused-expression": true,
+    "no-use-before-declare": true,
+    "semicolon": true,
+    "trailing-comma": false,
+    "typedef": false,
+    "typedef-whitespace": false,
+    "use-named-parameter": true,
+    "variable-name": false,
+    "whitespace": false
+  }
+}

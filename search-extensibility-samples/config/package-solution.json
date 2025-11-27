@@ -14,21 +14,10 @@
       "termsOfUseUrl": "",
       "mpnId": ""
     },
-    "metadata": {
-      "shortDescription": {
-        "default": "SharePoint Pages Suggester - Smart page recommendations for Modern Search"
-      },
-      "longDescription": {
-        "default": "Provides intelligent keyword suggestions from SharePoint Site Pages based on titles, descriptions, and popularity analytics. Features view-count sorting and trending pages display."
-      },
-      "screenshotPaths": [],
-      "videoUrl": "",
-      "categories": []
-    },
     "features": [
       {
         "title": "SharePoint Pages Suggester Feature",
-        "description": "Activates the SharePoint Pages Suggester Library for PnP Modern Search.",
+        "description": "Activates the SharePoint Pages Suggester Library for AEQUOS Modern Data Visualizer.",
         "id": "efc547e1-cfe2-4a18-b3d5-a2f33983de69",
         "version": "1.0.0.0"
       }

@@ -1,7 +1,6 @@
 import { BaseSuggestionProvider, ISuggestion } from '@aequos/extensibility';
 import { IPropertyPaneGroup } from '@microsoft/sp-property-pane';
-import { SPFI, spfi, SPFx } from "@pnp/sp";
-import "@pnp/sp/search";
+import { sp } from "@pnp/sp/presets/all";
 
 export interface IPageSuggestionProviderProperties {
   maxSuggestions?: number;
@@ -13,11 +12,10 @@ export class PageSuggestionProvider extends BaseSuggestionProvider<IPageSuggesti
   public static readonly ProviderName: string = 'Site Page Suggestions';
   public static readonly ProviderDescription: string = 'Suggests popular pages from Site Page titles and descriptions';
 
-  private _sp: SPFI;
   private readonly MAX_DESCRIPTION_LENGTH = 100;
 
   public onInit(): void {
-    this._sp = spfi().using(SPFx(this.context));
+    sp.setup({ spfxContext: this.context as any });
     console.log('[PageSuggestionProvider] Provider initialized');
   }
 
@@ -52,7 +50,7 @@ export class PageSuggestionProvider extends BaseSuggestionProvider<IPageSuggesti
     try {
       const kqlQuery = `(Title:${sanitizedQuery}* OR Description:${sanitizedQuery}*) AND ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C4118* AND FileExtension:aspx`;
 
-      const searchResults = await this._sp.search({
+      const searchResults = await sp.search({
         Querytext: kqlQuery,
         RowLimit: 10,
         SelectProperties: [
@@ -107,7 +105,7 @@ export class PageSuggestionProvider extends BaseSuggestionProvider<IPageSuggesti
     try {
       const kqlQuery = `ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C4118* AND FileExtension:aspx`;
 
-      const searchResults = await this._sp.search({
+      const searchResults = await sp.search({
         Querytext: kqlQuery,
         RowLimit: 10,
         SelectProperties: [
@@ -187,7 +185,7 @@ export class PageSuggestionProvider extends BaseSuggestionProvider<IPageSuggesti
     try {
       const kqlQuery = `(Title:${sanitizedQuery}* OR Description:${sanitizedQuery}*) AND ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C4118* AND FileExtension:aspx`;
 
-      const searchResults = await this._sp.search({
+      const searchResults = await sp.search({
         Querytext: kqlQuery,
         RowLimit: this.properties?.maxSuggestions || 5,
         SelectProperties: ["Title", "Description", "Path"],
