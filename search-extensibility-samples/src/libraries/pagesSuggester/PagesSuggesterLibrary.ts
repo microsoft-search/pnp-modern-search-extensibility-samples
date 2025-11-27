@@ -3,12 +3,10 @@ import {
   IExtensibilityLibrary,
   ISuggestionProviderDefinition,
   ISuggestionProvider,
-  IAdaptiveCardAction,
   ILayoutDefinition,
   IComponentDefinition,
-  IQueryModifierDefinition,
   IDataSourceDefinition
-} from '@pnp/modern-search-extensibility';
+} from '@aequos/extensibility';
 import * as Handlebars from 'handlebars';
 import { PageSuggestionProvider } from './PageSuggestionProvider';
 
@@ -54,20 +52,12 @@ export class PagesSuggesterLibrary implements IExtensibilityLibrary {
     return [];
   }
 
-  public getCustomQueryModifiers(): IQueryModifierDefinition[] {
-    return [];
-  }
-
   public getCustomDataSources(): IDataSourceDefinition[] {
     return [];
   }
 
   public registerHandlebarsCustomizations(handlebarsNamespace: typeof Handlebars): void {
     // No custom Handlebars helpers
-  }
-
-  public invokeCardAction(action: IAdaptiveCardAction): void {
-    // No-op: We don't handle custom adaptive card actions
   }
 }
 
