@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "sharepoint-pages-suggester-client-side-solution",
+    "name": "aequos-smart-pages-client-side-solution",
     "id": "8ab57633-bb5e-4f15-a988-e73b5e6e2e56",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
@@ -16,14 +16,14 @@
     },
     "features": [
       {
-        "title": "SharePoint Pages Suggester Feature",
-        "description": "Activates the SharePoint Pages Suggester Library for AEQUOS Modern Data Visualizer.",
+        "title": "AEQUOS Smart Pages Feature",
+        "description": "Activates intelligent page suggestions for AEQUOS Modern Data Visualizer.",
         "id": "efc547e1-cfe2-4a18-b3d5-a2f33983de69",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/sharepoint-pages-suggester-client-side-solution.sppkg"
+    "zippedPackage": "solution/aequos-smart-pages.sppkg"
   }
 }

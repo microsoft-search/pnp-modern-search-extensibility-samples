@@ -1,7 +1,7 @@
 {
-  "name": "sharepoint-pages-suggester",
+  "name": "aequos-smart-pages",
   "version": "1.0.0",
-  "description": "SharePoint Pages Suggester for AEQUOS Modern Data Visualizer - intelligent page recommendations",
+  "description": "AEQUOS Smart Pages - intelligent page recommendations for Modern Data Visualizer",
   "main": "lib/index.js",
   "engines": {
     "node": ">=12.13.0 <13.0.0 || >=14.15.0 <15.0.0"
