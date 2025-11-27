@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "aequos-smart-pages-client-side-solution",
-    "id": "8ab57633-bb5e-4f15-a988-e73b5e6e2e56",
+    "name": "aequos-page-intelligence-client-side-solution",
+    "id": "6f7b4793-32d7-45cf-9ec3-63cd7b46e36b",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
@@ -16,14 +16,14 @@
     },
     "features": [
       {
-        "title": "AEQUOS Smart Pages Feature",
+        "title": "AEQUOS Page Intelligence Feature",
         "description": "Activates intelligent page suggestions for AEQUOS Modern Data Visualizer.",
-        "id": "efc547e1-cfe2-4a18-b3d5-a2f33983de69",
+        "id": "82f3b111-8c38-4df2-9934-adab5961aa2d",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/aequos-smart-pages.sppkg"
+    "zippedPackage": "solution/aequos-page-intelligence.sppkg"
   }
 }

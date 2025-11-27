@@ -1,5 +1,5 @@
 {
-  "name": "aequos-smart-pages",
+  "name": "aequos-page-intelligence",
   "version": "1.0.0",
   "description": "AEQUOS Smart Pages - intelligent page recommendations for Modern Data Visualizer",
   "main": "lib/index.js",

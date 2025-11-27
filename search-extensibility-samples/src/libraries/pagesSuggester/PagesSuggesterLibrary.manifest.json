@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/library-manifest.schema.json",
-  "id": "147c6703-aef6-4538-a746-3d03db9f7ffa",
-  "alias": "SharePointPagesSuggesterLibrary",
+  "id": "70e04677-4ba8-443c-9493-44b9bba71d79",
+  "alias": "AequosPageIntelligenceLibrary",
   "componentType": "Library",
   "version": "*",
   "manifestVersion": 2,
   "loaderConfig": {
-    "entryModuleId": "sharepoint-pages-suggester-library",
+    "entryModuleId": "aequos-page-intelligence-library",
     "internalModuleBaseUrls": [
       "https://localhost:4321/"
     ]
