@@ -11,4 +11,32 @@ build.rig.getTasks = function() {
 
     return result;
 };
+
+const envCheck = build.subTask('environmentCheck', (gulp, config, done) => {
+
+  build.configureWebpack.mergeConfig({
+      additionalConfiguration: (generatedConfiguration) => {
+
+          // Remove the default html rule
+          generatedConfiguration.module.rules = generatedConfiguration.module.rules.filter(rule => {
+              return rule.test.toString() !== '/\\.html$/';
+          });
+
+          generatedConfiguration.module.rules.push({
+            // Add html loader without minimize so that we can use it for handlebars templates
+            test: /\.html$/,
+            loader: 'html-loader',
+            options: {
+              minimize: false
+            }
+          });
+          return generatedConfiguration;
+      }
+  });
+
+  done();
+});
+
+build.rig.addPreBuildTask(envCheck);
+
 build.initialize(gulp);

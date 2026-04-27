@@ -40,6 +40,8 @@ export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
   }
 
   public getCustomLayouts(): ILayoutDefinition[] {
+    /* eslint-disable @typescript-eslint/no-var-requires */
+    
     return [
       {
         name: 'PnP Custom layout (Handlebars)',
@@ -47,7 +49,7 @@ export class MyCompanyLibraryLibrary implements IExtensibilityLibrary {
         key: 'CustomLayoutHandlebars',
         type: LayoutType.Results,
         renderType: LayoutRenderType.Handlebars,
-        templateContent: require('../custom-layout.html'),
+        templateContent: require('../custom-layout.html').default.toString(),
         serviceKey: ServiceKey.create<ILayout>('PnP:CustomLayoutHandlebars', CustomLayout),
       },
       {
