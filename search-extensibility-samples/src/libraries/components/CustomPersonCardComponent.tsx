@@ -116,4 +116,8 @@ export class CustomPersonCardWebComponent extends BaseWebComponent {
         const personaItem = <CustomPersonCardComponent {...props} spHttpClient={this._spHttpClient} pageContext={this._pageContext} />;
         ReactDOM.render(personaItem, this);
     }
+
+    protected onDispose(): void {
+        ReactDOM.unmountComponentAtNode(this);
+    }
 }

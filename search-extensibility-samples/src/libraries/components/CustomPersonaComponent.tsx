@@ -139,4 +139,8 @@ export class CustomPersonaWebComponent extends BaseWebComponent {
         const personaItem = <CustomPersonaComponent {...props} />;
         ReactDOM.render(personaItem, this);
     }
+
+    protected onDispose(): void {
+        ReactDOM.unmountComponentAtNode(this);
+    }
 }

@@ -22,10 +22,10 @@ module.exports = {
                 // STANDARDIZED BY:   @typescript-eslint\eslint-plugin\dist\configs\recommended.json
                 //
                 // CONFIGURATION:     By default, these are banned: String, Boolean, Number, Object, Symbol
-                '@typescript-eslint/ban-types': [
+                '@typescript-eslint/ban-types': 'off',
+                '@typescript-eslint/no-restricted-types': [
                     1,
                     {
-                        'extendDefaults': false,
                         'types': {
                             'String': {
                                 'message': 'Use \'string\' instead',
